@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowers List</title>
+</head>
+<body>
+    <h1>Borrowers List</h1>
+    <a href="{% url 'add_borrower' %}">Add a New Borrower</a>
+    <form method="get" action="{% url 'search_borrowers' %}">
+        <input type="text" name="q" placeholder="Search by name">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for borrower in borrowers %}
+            <li>
+                {{ borrower.name }} ({{ borrower.email }})
+                {% if borrower.borrowedbook_set.count == 0 %}
+                    <a href="{% url 'remove_borrower' borrower.id %}">Remove</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No borrowers available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'list_books' %}">View Books</a>
+    <a href="{% url 'list_authors' %}">View Authors</a>
+</body>
+</html>

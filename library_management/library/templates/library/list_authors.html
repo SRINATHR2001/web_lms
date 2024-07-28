@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors List</title>
+</head>
+<body>
+    <h1>Authors List</h1>
+    <a href="{% url 'add_author' %}">Add a New Author</a>
+    <form method="get" action="{% url 'search_authors' %}">
+        <input type="text" name="q" placeholder="Search by name">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for author in authors %}
+            <li>
+                {{ author.name }} 
+                {% if author.book_set.count == 0 %}
+                    <a href="{% url 'remove_author' author.id %}">Remove</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No authors available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'list_books' %}">View Books</a>
+    <a href="{% url 'list_borrowers' %}">View Borrowers</a>
+</body>
+</html>
