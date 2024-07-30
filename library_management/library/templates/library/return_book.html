@@ -1,16 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Return Book</title>
-</head>
-<body>
-    <h1>Return "{{ borrowed_book.book.title }}"</h1>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Return Book</button>
-    </form>
-    <a href="{% url 'list_books' %}">Back to List of Books</a>
-</body>
-</html>
+{% extends "library/base.html" %}
+{%block title%}RETURN BOOKS {%endblock%}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-5">Return "{{ borrowed_book.book.title }}"</h1>
+
+        <div class="text-center mt-4">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success btn-lg">Return Book</button>
+            </form>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'list_books' %}" class="btn btn-secondary">Back to List of Books</a>
+        </div>
+    </div>
+{%endblock%}
+

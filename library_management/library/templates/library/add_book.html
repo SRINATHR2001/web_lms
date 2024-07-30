@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Book</title>
-</head>
-<body>
-    <h1>Add a New Book</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add Book</button>
-    </form>
-    <a href="{% url 'list_books' %}">Back to List of Books</a>
-</body>
-</html>
+{% extends "library/base.html" %}
+{%block title%}ADD BOOK {%endblock%}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <h1 class="text-center">Add a New Book</h1>
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Add Book</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="{% url 'list_books' %}">Back to List of Books</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}
+

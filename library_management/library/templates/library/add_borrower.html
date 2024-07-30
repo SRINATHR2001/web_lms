@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Borrower</title>
-</head>
-<body>
-    <h1>Add a New Borrower</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add Borrower</button>
-    </form>
-    <a href="{% url 'list_borrowers' %}">Back to List of Borrowers</a>
-</body>
-</html>
+{% extends "library/base.html" %}
+{%block title%}ADD BORROWER {%endblock%}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <h1 class="text-center">Add a New Borrower</h1>
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Add Borrower</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="{% url 'list_borrowers' %}">Back to List of Borrowers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}
+

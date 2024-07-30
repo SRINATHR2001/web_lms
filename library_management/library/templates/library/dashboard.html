@@ -1,49 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        .button {
-            display: inline-block;
-            margin: 10px;
-            padding: 15px 25px;
-            font-size: 18px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>Library Management System</h1>
-    <div>
-        <a href="{% url 'add_book' %}" class="button">Add Book</a>
-        <a href="{% url 'list_books' %}" class="button">View Books</a>
+{% extends "library/base.html" %}
+{%block title%}LIBRARY MANAGEMENT SYSTEM {%endblock%}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-5">Library Management System</h1>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-4 text-center">
+                <a href="{% url 'add_book' %}" class="btn btn-primary btn-lg mb-3">Add Book</a>
+                <a href="{% url 'list_books' %}" class="btn btn-primary btn-lg mb-3">View Books</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <a href="{% url 'add_author' %}" class="btn btn-primary btn-lg mb-3">Add Author</a>
+                <a href="{% url 'list_authors' %}" class="btn btn-primary btn-lg mb-3">View Authors</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <a href="{% url 'add_borrower' %}" class="btn btn-primary btn-lg mb-3">Add Borrower</a>
+                <a href="{% url 'list_borrowers' %}" class="btn btn-primary btn-lg mb-3">View Borrowers</a>
+            </div>
+        </div>
     </div>
-    <div>
-        <a href="{% url 'add_author' %}" class="button">Add Author</a>
-        <a href="{% url 'list_authors' %}" class="button">View Authors</a>
-    </div>
-    <div>
-        <a href="{% url 'add_borrower' %}" class="button">Add Borrower</a>
-        <a href="{% url 'list_borrowers' %}" class="button">View Borrowers</a>
-    </div>
-    <div>
-        <a href="{% url 'search_books' %}" class="button">Search Books</a>
-        <a href="{% url 'search_authors' %}" class="button">Search Authors</a>
-        <a href="{% url 'search_borrowers' %}" class="button">Search Borrowers</a>
-    </div>
-</body>
-</html>
+{% endblock %}
+

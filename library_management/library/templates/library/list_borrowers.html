@@ -1,30 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrowers List</title>
-</head>
-<body>
-    <h1>Borrowers List</h1>
-    <a href="{% url 'add_borrower' %}">Add a New Borrower</a>
-    <form method="get" action="{% url 'search_borrowers' %}">
-        <input type="text" name="q" placeholder="Search by name">
-        <button type="submit">Search</button>
-    </form>
-    <ul>
-        {% for borrower in borrowers %}
-            <li>
-                {{ borrower.name }} ({{ borrower.email }})
-                {% if borrower.borrowedbook_set.count == 0 %}
-                    <a href="{% url 'remove_borrower' borrower.id %}">Remove</a>
-                {% endif %}
-            </li>
-        {% empty %}
-            <li>No borrowers available.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'list_books' %}">View Books</a>
-    <a href="{% url 'list_authors' %}">View Authors</a>
-</body>
-</html>
+{% extends "library/base.html" %}
+{%block title%}LIST BORROWERS {%endblock%}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-5">Borrowers List</h1>
+
+        <div class="text-center mb-4">
+            <a href="{% url 'add_borrower' %}" class="btn btn-primary">Add a New Borrower</a>
+        </div>
+
+        <form method="get" action="{% url 'search_borrowers' %}" class="form-inline justify-content-center mb-4">
+            <input type="text" name="q" class="form-control mr-2" placeholder="Search by name">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <ul class="list-group mb-4">
+            {% for borrower in borrowers %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ borrower.name }} ({{ borrower.email }})
+                    <div>
+                        {% if borrower.borrowedbook_set.count == 0 %}
+                            <a href="{% url 'remove_borrower' borrower.id %}" class="btn btn-danger btn-sm">Remove</a>
+                        {% endif %}
+                    </div>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-center">No borrowers available.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="text-center">
+            <a href="{% url 'list_books' %}" class="btn btn-secondary mr-2">View Books</a>
+            <a href="{% url 'list_authors' %}" class="btn btn-secondary">View Authors</a>
+        </div>
+    </div>
+{%endblock%}
+
