@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q
 from .models import Book, Author, Borrower, BorrowedBook
 from .forms import BookForm, AuthorForm, BorrowerForm
 
@@ -21,7 +22,15 @@ def list_books(request):
 
 def search_books(request):
     query = request.GET.get('q')
-    books = Book.objects.filter(title__icontains=query)
+    if query:
+        books = Book.objects.filter(
+            Q(title__icontains=query) |
+            Q(author__name__icontains=query) |
+            Q(genre__icontains=query)
+        )
+    else:
+        books = Book.objects.all()
+
     return render(request, 'library/list_books.html', {'books': books})
 
 def remove_book(request, book_slug):
